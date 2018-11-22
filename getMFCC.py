@@ -40,6 +40,6 @@ for filename in os.listdir(directoryName):
         file.close() # close file
 print("------Extracted done------")
 
-mfccs = []
-labels = []
-for i in os.listdir()
+# mfccs = []
+# labels = []
+# for i in os.listdir()
