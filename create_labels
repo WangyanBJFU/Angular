@@ -1,5 +1,21 @@
 import os
 
 
-    print("labels has been produced")
+dirName = '/home/wy/all_data/data_c863_backup/MFCCresults'
+resultsDirectory = dirName + "/labels"
+def create_labels():
+    if not os.path.exists(resultsDirectory):
+        os.makedirs(resultsDirectory)
+    mfccs_name = []
+    labels = []
+
+    for filename in os.listdir(dirName):
+        if filename.endswith('.csv'):
+            mfccs.append(filename)
+            labels.append(filename.split("/")[-1][:3])
+            # outputFile = resultsDirectort + "/"
+            # file = open(outputFile)
+    return mfccs_name, labels
+
+
 
