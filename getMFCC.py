@@ -44,10 +44,10 @@ def getMFCC():
             np.savetxt(file, mfcc_39d, delimiter=",") #save MFCCs as .csv
             file.close() # close file
     print("------Extracted done------")
-    print("mfccs' length is: ", len(mfccs))
+    
     return mfccs
 
 if __name__ == "__main__":
     a = getMFCC()
     print(a)
-
+    print("mfccs' length is: ", len(mfccs))
