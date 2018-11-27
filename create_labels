@@ -1,24 +1,5 @@
 import os
 
-root = '/home/wangyan/all_data/full_data_c863'
-with open('/home/wangyan/all_data/full_data_c863_detailed/c863_train.data', 'w') as file:
-    humans = os.listdir(root)
-    # print(humans)
-    index = 0
-    # for human in humans[:76]:    # humans不约束范围的话总数是166
-    for human in humans[:166]:
-        path = os.path.join(root, human)
-        waves = os.listdir(path)
-        # print(waves)
-        index += 1
-        # count 166 speakers, index represents their representation, called 1-166.
 
-        # 166 folders
-        # total of 3320 items
-
-        print(index)
-        for wave in waves:
-            path_wav = os.path.join(path, wave)
-            file.writelines(path_wav + " %d\n" % index)
-    print("data url has been produced")
+    print("labels has been produced")
 
