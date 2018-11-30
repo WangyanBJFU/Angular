@@ -1,6 +1,6 @@
 import numpy as np
 
-def cmvnOperation(feature):
+def cmvn(feature):
     if type(feature) == np.ndarray:
         feature = np.array(feature)
         
