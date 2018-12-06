@@ -48,6 +48,6 @@ def getMFCC():
     return mfccs
 
 if __name__ == "__main__":
-    a = getMFCC()
-    print(a)
+    mfccs = getMFCC()
+    print(mfccs)
     print("mfccs' length is: ", len(mfccs))
