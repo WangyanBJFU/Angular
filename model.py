@@ -57,7 +57,7 @@ def add_maxpool_layer(x, kernel_height, kernel_width, strideX, strideY, name, pa
 def add_dropout_layer(x, keep_prob, name=None):
     return tf.nn.dropout(x, keep_prob, name)
 
-
+'''
 def buildCNN(data_input):
     x = tflearn.conv_2d(data_input, 32, 3, strides = 1, activation='prelu', weights_init = 'xavier')
     x = tflearn.conv_2d(x, 32, 3, strides = 2, activation='prelu', weights_init = 'xavier')
@@ -69,9 +69,9 @@ def buildCNN(data_input):
     embeddings = tflearn.fully_connected(x, 2, weights_init = 'xavier')
     y = add_fc_layer(x, 128, 10, "y", "relu")
     return embeddings
-
-
 '''
+
+
 def buildVGG19(inputs, embedding_dim = 2):
     """block 1"""
     conv1_1 = add_conv_layer(inputs, 3, 3, 1, 1, 64, "conv1_1" )
@@ -114,6 +114,6 @@ def buildVGG19(inputs, embedding_dim = 2):
 
     # self.fc8 = add_fc_layer(drop2, 4096, self.NUMCLASSES, "fc8", tf.nn.relu)
 
-    return embeddings # FIXME:输出维度=numclasses
-'''
+    return embeddings 
+
 
