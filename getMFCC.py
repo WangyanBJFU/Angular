@@ -1,11 +1,15 @@
-from python_speech_features import mfcc
-from python_speech_features import delta
-from python_speech_features import logfbank
+from python_speech_features.python_speech_features import mfcc
+from python_speech_features.python_speech_features import delta
+from python_speech_features.python_speech_features import logfbank
+from python_speech_features.cmvn import cmvnOperation
+from python_speech_features.concatenate import concatenate
+from python_speech_features.cmvn import cmvnOperation
+from python_speech_features.concatenate import concatenate
+
 import scipy.io.wavfile as wav
 import numpy as np
 import os
-from cmvn import cmvnOperation
-from concatenate import concatenate
+
 # directory where we your .wav files are
 directoryName = "/home/wy/all_data/data_c863_backup"  # put your own directory here
 # directory to put our results in, you can change the name if you like
@@ -44,10 +48,9 @@ def getMFCC():
             np.savetxt(file, mfcc_39d, delimiter=",") #save MFCCs as .csv
             file.close() # close file
     print("------Extracted done------")
-    
     return mfccs
 
 if __name__ == "__main__":
-    mfccs = getMFCC()
-    print(mfccs)
+    a = getMFCC()
+    print(a)
     print("mfccs' length is: ", len(mfccs))
