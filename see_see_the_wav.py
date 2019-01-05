@@ -5,9 +5,13 @@ import math
 import os
 import wave
 
+'''
+自己录了个“啊~~~~”转成wav之后想看看声音波形，
+学着试了试
+'''
 
-def wav_show(wave_data, fs):
-    time = np.arange(0, len(wave_data)) * (1.0 / fs)
+def wav_show(wave_data, framerate):
+    time = np.arange(0, len(wave_data)) * (1.0 / framerate)
     plt.plot(time, wave_data)
     plt.show()
 
@@ -28,7 +32,7 @@ def read_wav_data(filename):
 
 
 if(__name__ == '__main__'):
-    wave_data, fs = read_wav_data('wangyan.wav')
-    wav_show(wave_data[0],fs)
+    wave_data, framerate = read_wav_data('wangyan.wav')
+    wav_show(wave_data[0],framerate)
 
                                                                                                                                          35,0-1        All
