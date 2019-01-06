@@ -9,8 +9,9 @@ import wave
 自己录了个“啊~~~~”转成wav之后想看看声音波形，
 随便试了试
 如果用python3 plt生成的画布上只有坐标和指针没图像的话，"The Gtk3Agg backend is known to not work on Python 3.x with pycairo."
-就执行一句
-sudo pip3 install cairocffi就能显示了
+执行
+sudo pip3 install cairocffi
+就能显示
 '''
 
 path = '/home/wy/wav_show/audio'
