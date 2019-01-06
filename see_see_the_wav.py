@@ -13,10 +13,12 @@ import wave
 sudo pip3 install cairocffi就能显示了
 '''
 
-path = '/home/wy/Ahhhh/audio'
+path = '/home/wy/wav_show/audio'
 dirs = os.listdir(path)
+print("Files in this folder are:")
 for file in dirs:
-    print("Files in this folder are: "file)
+    print(file)
+
 
 def wav_show(wave_data, framerate):
     time = np.arange(0, len(wave_data)) * (1.0 / framerate)
@@ -40,7 +42,9 @@ def read_wav_data(filename):
 
 
 if(__name__ == '__main__'):
+    t0=time.time()
     wave_data, framerate = read_wav_data('wangyan.wav')
+    t1=time.time()
     wav_show(wave_data[0],framerate)
-
+    print("Reading wav data's cost time is:",t1-t0)
                                                                                                                                          35,0-1        All
