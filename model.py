@@ -107,12 +107,7 @@ def buildVGG19(inputs, embedding_dim = 2):
     """block 6"""
     flat = tf.reshape(pool5, [-1, 7*7*512])
     embeddings = add_fc_layer(flat, 7*7*512, embedding_dim, "embedding", tf.nn.relu)
-    #drop1 = add_dropout_layer(fc6, embedding_dim, "drop1")
 
-    # fc7 = add_fc_layer(drop1, 4096, 4096, "fc7", tf.nn.relu)
-    # drop2 = add_dropout_layer(fc7, , "drop2")
-
-    # self.fc8 = add_fc_layer(drop2, 4096, self.NUMCLASSES, "fc8", tf.nn.relu)
 
     return embeddings 
 
