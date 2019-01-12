@@ -3,7 +3,6 @@ import tensorflow as tf
 import numpy as np
 import model
 import sys, time
-from tqdm import tqdm # python的进度条库
 from tensorflow.examples.tutorials.mnist import input_data
 from model import Angular_Softmax_Loss
 from model import L2_Sofrmax_Loss
