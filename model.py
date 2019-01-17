@@ -2,8 +2,6 @@ import tensorflow as tf
 import tflearn
 
 def L2_Sofrmax_Loss(embeddings, labels, num_classes, margin=1):
-    embeddings_norm = tf.norm(embeddings, axis=1) # 将w值进行权值归一化
-
     with tf.variable_scope("softmax"):
         weights = tf.get_variable(name='embedding_weights',
                                   shape=[embeddings.get_shape().as_list()[-1], num_classes],
@@ -21,9 +19,6 @@ def L2_Sofrmax_Loss(embeddings, labels, num_classes, margin=1):
 
         return pred_prob, loss
 
-
-
-
 def add_fc_layer(inputs, in_size, out_size, name, activation_function=None):
     with tf.variable_scope(name) as scope:
         w = tf.Variable(tf.random_normal([in_size, out_size]))
@@ -35,7 +30,6 @@ def add_fc_layer(inputs, in_size, out_size, name, activation_function=None):
             output = activation_function(Wx_plus_b)
         return output
 
-
 def add_conv_layer(x, kernel_height, kernel_width, strideX, strideY, feature_num, name, padding = 'SAME'):
 
     channel = int(x.get_shape()[-1])
@@ -46,18 +40,16 @@ def add_conv_layer(x, kernel_height, kernel_width, strideX, strideY, feature_num
         output = tf.nn.bias_add(feature_map, b, name=scope)
         # return tf.nn.relu(output, feature_map.get_shape().as_list(), name=scope.name)
         return tf.nn.relu(output)
-
+    
 def add_maxpool_layer(x, kernel_height, kernel_width, strideX, strideY, name, padding = 'SAME'):
     with tf.variable_scope(name) as scope:
         return tf.nn.max_pool(x, ksize=[1, kernel_height, kernel_width, 1],
                               strides=[1, strideX, strideY, 1],
                               padding=padding, name=scope.name)
 
-
 def add_dropout_layer(x, keep_prob, name=None):
     return tf.nn.dropout(x, keep_prob, name)
 
-'''
 def buildCNN(data_input):
     x = tflearn.conv_2d(data_input, 32, 3, strides = 1, activation='prelu', weights_init = 'xavier')
     x = tflearn.conv_2d(x, 32, 3, strides = 2, activation='prelu', weights_init = 'xavier')
@@ -69,46 +61,3 @@ def buildCNN(data_input):
     embeddings = tflearn.fully_connected(x, 2, weights_init = 'xavier')
     y = add_fc_layer(x, 128, 10, "y", "relu")
     return embeddings
-'''
-
-
-def buildVGG19(inputs, embedding_dim = 2):
-    """block 1"""
-    conv1_1 = add_conv_layer(inputs, 3, 3, 1, 1, 64, "conv1_1" )
-    conv1_2 = add_conv_layer(conv1_1, 3, 3, 1, 1, 64, "conv1_2")
-    pool1 = add_maxpool_layer(conv1_2, 2, 2, 2, 2, "pool1")
-
-    """block 2"""
-    conv2_1 = add_conv_layer(pool1, 3, 3, 1, 1, 128, "conv2_1")
-    conv2_2 = add_conv_layer(conv2_1, 3, 3, 1, 1, 128, "conv2_2")
-    pool2 = add_maxpool_layer(conv2_2, 2, 2, 2, 2, "pool2")
-
-    """block 3"""
-    conv3_1 = add_conv_layer(pool2, 3, 3, 1, 1, 256, "conv3_1")
-    conv3_2 = add_conv_layer(conv3_1, 3, 3, 1, 1, 256, "conv3_2")
-    conv3_3 = add_conv_layer(conv3_2, 3, 3, 1, 1, 256, "conv3_3")
-    conv3_4 = add_conv_layer(conv3_3, 3, 3, 1, 1, 256, "conv3_4")
-    pool3 = add_maxpool_layer(conv3_4, 2, 2, 2, 2, "pool3")
-
-    """block 4"""
-    conv4_1 = add_conv_layer(pool3, 3, 3, 1, 1, 512, "conv4_1")
-    conv4_2 = add_conv_layer(conv4_1, 3, 3, 1, 1, 512, "conv4_2")
-    conv4_3 = add_conv_layer(conv4_2, 3, 3, 1, 1, 512, "conv4_3")
-    conv4_4 = add_conv_layer(conv4_3, 3, 3, 1, 1, 512, "conv4_4")
-    pool4 = add_maxpool_layer(conv4_4, 2, 2, 2, 2, "pool4")
-
-    """block 5"""
-    conv5_1 = add_conv_layer(pool4, 3, 3, 1, 1, 512, "conv5_1")
-    conv5_2 = add_conv_layer(conv5_1, 3, 3, 1, 1, 512, "conv5_2")
-    conv5_3 = add_conv_layer(conv5_2, 3, 3, 1, 1, 512, "conv5_3")
-    conv5_4 = add_conv_layer(conv5_3, 3, 3, 1, 1, 512, "conv5_4")
-    pool5 = add_maxpool_layer(conv5_4, 2, 2, 2, 2, "pool5")
-
-    """block 6"""
-    flat = tf.reshape(pool5, [-1, 7*7*512])
-    embeddings = add_fc_layer(flat, 7*7*512, embedding_dim, "embedding", tf.nn.relu)
-
-
-    return embeddings 
-
-
