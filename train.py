@@ -6,8 +6,6 @@ import sys, time
 from tensorflow.examples.tutorials.mnist import input_data
 from model import Angular_Softmax_Loss
 from model import L2_Sofrmax_Loss
-# tf.reset_default_graph()
-
 
 lr = 0.001 # 学习率不变化
 epochs = 1000
@@ -31,14 +29,8 @@ class VGG19(object):
 # prepare data
 mnist = input_data.read_data_sets("./MNIST_data", one_hot=False, reshape=False)
 
-# training
-# with tf.Session() as sess:
-
-
-
 mod = VGG19(batch_size, num_classes)
 global_step = tf.Variable(0, trainable=False)
-# add_step_op = tf.assign_add(global_step, tf.constant(1))
 
 learningrate = tf.train.exponential_decay(0.001, global_step, 10000, 0.9, staircase=False)
 optimizer = tf.train.AdamOptimizer(learningrate)
@@ -47,7 +39,6 @@ train_optimizer = optimizer.minimize(mod.loss)
 init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
-# process_bar = ShowProcess(epochs, 'OK')
 
 for step in range(epochs):
     batch_xs, batch_ys = mnist.train.next_batch(batch_size)
@@ -57,16 +48,7 @@ for step in range(epochs):
         print("Step:", step+100, "\tThe L2-Softmax Loss is:", v)
     max_steps = 100
 
-
-    # process_bar.show_process()
-    time.sleep(0.01)
-
-
 print("The training step is done")
-
-# evaluating
-# with tf.Session() as sess:
-# mod = VGG19(batch_size, num_classes)
 
 n_test = mnist.test.images.shape[0]
 test_data = np.ndarray([batch_size, 28, 28, 1])
